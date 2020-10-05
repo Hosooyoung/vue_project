@@ -1,8 +1,6 @@
-제작자 : hodu
-이 프로젝트는 UI개발업무능력 향상을 위한 프로젝트입니다.
-기존에 했던 Vue.CLI todolist프로젝트를 응용할 예정입니다.
+일정관리 페이지 제작 프로젝트입니다.
 
-# webpack-simple
+# vue-bootstrap
 
 ## Project setup
 ```
