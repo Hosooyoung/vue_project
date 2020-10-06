@@ -1,23 +1,22 @@
 <template>
-  <Login></Login>
- 
-  <button>시험용</button>
-  <!-- <br>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-   -->
+<div id="app">
+  <router-link to="/"></router-link>
+  <router-view/>
+  <!--<img alt="Vue logo" src="./assets/logo.png">
+  <Main msg="Welcome to Your Vue.js App"/>
+  !-->
+  </div>
 </template>
-
 <script>
 
  console.log("hello");
-//import HelloWorld from './components/HelloWorld.vue'
-import Login from './components/Login.vue'
+//import Main from './components/Main.vue'
+//import Login from './components/Login.vue'
 export default {
   name: 'App',
   components: {
-  //  HelloWorld,
-    Login
+   // Main,
+//    Login
   } 
 }
 
