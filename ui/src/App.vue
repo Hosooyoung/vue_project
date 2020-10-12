@@ -1,22 +1,20 @@
 <template>
-<div id="app">
-  <router-link to="/"></router-link>
-  <router-view/>
+  <Login></Login>
   <!--<img alt="Vue logo" src="./assets/logo.png">
   <Main msg="Welcome to Your Vue.js App"/>
   !-->
-  </div>
+
 </template>
 <script>
 
  console.log("hello");
 //import Main from './components/Main.vue'
-//import Login from './components/Login.vue'
+import Login from './components/Login.vue'
 export default {
   name: 'App',
   components: {
    // Main,
-//    Login
+    Login
   } 
 }
 

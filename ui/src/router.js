@@ -1,4 +1,4 @@
-import Vue from 'vue'
+/*import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '@/components/Login.vue'
 import Main from '@/components/Main.vue'
@@ -9,4 +9,4 @@ const router = new VueRouter({
         { path: '/', component: Login }
     ]
 })
-export default router
+export default router */
