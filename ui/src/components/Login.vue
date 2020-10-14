@@ -1,69 +1,50 @@
 <template>
+ <div>
 	<header>
 		<h1>LOGIN</h1>
 	</header>
-     <div class="form-group">
    <label for="id">ID</label>
    <br>
-   <input type="text" id="id" v-model="users.userid">
-</div>
-<div class="form-group">
+   <input type="text" id="id" v-model="user.userid">
+	<br>
    <label for="password">Password</label>
    <br>
-   <input type="text" id="password" v-model="users.password">
+   <input type="text" id="password" v-model="user.password">
    <br>
-	<button v-on:click="logincheck">로그인</button>  
+	<button v-on:click="login">로그인</button>  
 	<br>
-	<button v-on:click="CreateAccount">회원가입</button>  
+	<a href="/create">가입하기</a>  
 </div>
 </template>
 <script>
-   export default{
-		name:'Login',
-		data(){
-			return{
-				users:{
-					userid:'',
-					password:''
-				}
-			}
-		},
-	methods :{
-		logincheck : function() {
-			console.log(this.users.userid);
-			console.log(this.users.password);
-		},
-		CreateAccount : function(){
-			console.log("createaccount");
-		}
+export default {
+    data: function () {
+  return {
+    user: {
+      userid: '',
+      password: ''
+    }
+  }
+},
+methods: {
+ login: function () {
+     console.log('logincheck!!!')
+    this.$http.post('/api/users/logincheck', {
+      user: this.user
+    })
+    .then(
+      (res) => {  //로그인 성공
+        alert(res.data.message);
+      },
+      (err) => { // error 를 보여줌
+        console.log('err1');
+        alert(err);         
+    })
+    .catch(err => {
+        console.log('err2');
+      alert(err);
+    })
+  }
 }
-} 
-    
+}
 </script>
-<style>
-.inputBox{
-	background :white;
-	height : 50px;
-	line-height : 50px;
-	border-radius: 5px;
-}
-.inputBox input {
-	border-style :none;
-	font-size: 0.9rem;
-}
-.addContainer{
-	float:right;
-	background:linear-gradient(to right, #6478FB, #8764FB);
-	display:block;
-	width :3rem;
-	border-radius: 0 5px 5px 0;
-}
-.addBtn{
-	color: white;
-	vertical-align: middle;
-}
-.clearAllBtn{
-		color: #e20303;
-		display : black;
-	}
-    </style>

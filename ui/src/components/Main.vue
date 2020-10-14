@@ -1,6 +1,6 @@
 <template>
 <Sidebar></Sidebar>
-  <div class="hello">
+<!--  <div class="hello">
     <h1>{{ msg }}</h1>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
    With Bootstrap!
@@ -9,7 +9,7 @@
   </button>
 </div>
     
-  </div>
+  </div>-->
  </template>
 
 <script>

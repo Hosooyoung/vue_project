@@ -1,6 +1,4 @@
-/*module.exports = {
-
-
+module.exports = {
     devServer: {
         proxy: {
             '/api': {
@@ -12,14 +10,5 @@
             }
         }
     },
-    outputDir: '../server/public'
-
-}*/
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-    .BundleAnalyzerPlugin;
-
-module.exports = {
-    configureWebpack: {
-        plugins: [new BundleAnalyzerPlugin()]
-    }
-};
+    outputDir: '../svr/public'
+}

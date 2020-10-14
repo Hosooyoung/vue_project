@@ -1,6 +1,4 @@
-일정관리 페이지 제작 프로젝트입니다.
-
-# vue-bootstrap
+# ui
 
 ## Project setup
 ```

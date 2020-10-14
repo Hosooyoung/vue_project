@@ -1,18 +1,11 @@
-/*import Vue from 'vue'
+import Vue from 'vue'
 import App from './App.vue'
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import router from './router.js'
-import mysql from 'mysql'
-import Net from 'net'
+import { router } from './routes/index.js'
+import axios from 'axios'
+Vue.config.productionTip = false
+Vue.prototype.$http = axios;
+
 new Vue({
-    render: h => h(App)
+    render: function(h) { return h(App) },
+    router
 }).$mount('#app')
-*/
-import { createApp } from 'vue'
-import App from './App.vue'
-import 'bootstrap'
-
-import 'bootstrap/dist/css/bootstrap.min.css'
-
-createApp(App).mount('#app')
