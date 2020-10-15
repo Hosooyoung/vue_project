@@ -34,7 +34,7 @@ export default {
 },
    methods: {
   createAccount: function () {
-    this.$http.post('/api/users/createAcc', { 
+    this.$http.post('/users/createAcc', { 
       user: this.user
     })
     .then((res) => {

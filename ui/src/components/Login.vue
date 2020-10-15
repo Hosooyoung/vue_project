@@ -5,11 +5,11 @@
 	</header>
    <label for="id">ID</label>
    <br>
-   <input type="text" id="id" v-model="user.userid">
+   <input type="id" id="id" v-model="user.userid">
 	<br>
    <label for="password">Password</label>
    <br>
-   <input type="text" id="password" v-model="user.password">
+   <input type="password" id="password" v-model="user.password">
    <br>
 	<button v-on:click="login">로그인</button>  
 	<br>
@@ -29,7 +29,7 @@ export default {
 methods: {
  login: function () {
      console.log('logincheck!!!')
-    this.$http.post('/api/users/logincheck', {
+    this.$http.post('/users/logincheck', {
       user: this.user
     })
     .then(
