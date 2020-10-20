@@ -38,16 +38,26 @@ export default {
       user: this.user
     })
     .then((res) => {
-      if (res.data.success == true) {
+      if (res.data.createsuccess == true) {
         alert(res.data.message);
         this.$router.push('/') 
       }
-      if (res.data.success == false) {
+      if (res.data.createsuccess == false) {
         alert(res.data.message);
+        this.user.userid='',
+        this.user.name='',
+        this.user.password='',
+        this.user.phone='',
+        this.user.email=''
       }
     })
     .catch(function (error) {
       alert(error)
+      this.user.userid='',
+        this.user.name='',
+        this.user.password='',
+        this.user.phone='',
+        this.user.email=''
     })
   }
 }

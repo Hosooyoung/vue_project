@@ -1,46 +1,24 @@
 <template>
-<Sidebar></Sidebar>
-<!--  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-   With Bootstrap!
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-    
-  </div>-->
- </template>
-
+  <div>
+    <p>메인화며어언</p>
+    <button v-on:click="logout">로그아웃</button>
+  </div>
+</template>
 <script>
-import Sidebar from './sidebar.vue'
-
 export default {
-  name: 'Main',
-  components:{
-    Sidebar
-      },
-  props: {
-    msg: String
+ 
+  data () {
+    return {
+      
+    }
+  },
+ methods: {
+ logout: function () {
+     console.log('logout')
+    localStorage.removeItem("id")
+     localStorage.removeItem("name")
+    this.$router.push('/') 
   }
 }
-
+}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

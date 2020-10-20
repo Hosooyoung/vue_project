@@ -24,7 +24,14 @@ export default {
       userid: '',
       password: ''
     }
-  }
+  } 
+},created:function(){
+    var check_id=localStorage.getItem("id");
+    var check_name=localStorage.getItem("name");
+    if(check_id!=null&&check_name!=null){
+    localStorage.removeItem("id")
+     localStorage.removeItem("name")
+    }
 },
 methods: {
  login: function () {
@@ -34,11 +41,18 @@ methods: {
     })
     .then(
       (res) => {  //로그인 성공
+        console.log(res.data.success)
+        if (res.data.success == true) {
+        alert(res.data.message);
+        localStorage.setItem("id" ,this.user.userid)
+        localStorage.setItem("name" ,res.data.name)
+        this.$router.push('/main') 
+      }else
         alert(res.data.message);
       },
       (err) => { // error 를 보여줌
         console.log('err1');
-        alert(err);         
+        alert(err);
     })
     .catch(err => {
         console.log('err2');

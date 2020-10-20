@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 const bcrypt = require('bcrypt');
+
 var connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -9,6 +10,7 @@ var connection = mysql.createConnection({
     password: 'admin',
     database: 'vue_project'
 });
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     console.log('userA');
@@ -33,12 +35,12 @@ router.post('/createAcc', function(req, res) {
                 if (err) throw err;
             });
             res.json({
-                success: false,
+                createsuccess: true,
                 message: '가입성공'
             })
         } else {
             res.json({
-                success: false,
+                createsuccess: false,
                 message: '아이디중복'
             })
         }
@@ -47,16 +49,11 @@ router.post('/createAcc', function(req, res) {
 });
 ///////////login account check//////////////////////
 router.post('/logincheck', function(req, res) {
-    // console.log('userC');
     const user = {
         'userid': req.body.user.userid,
         'password': req.body.user.password
     };
-    console.log(user.userid);
-    console.log(user.password);
-    console.log(typeof user.userid);
-    connection.query('SELECT id, user_password FROM users WHERE id = "' + user.userid + '"', function(err, row) {
-        //  console.log('queryOK');
+    connection.query('SELECT id, user_password, user_name FROM users WHERE id = "' + user.userid + '"', function(err, row) {
         if (row[0] == undefined) {
             res.json({ // 아이디 없음
                 success: false,
@@ -65,9 +62,11 @@ router.post('/logincheck', function(req, res) {
         }
         if (row[0] !== undefined && row[0].id === user.userid) {
             if (row[0].user_password == user.password) {
+
                 res.json({ // 로그인 성공 
                     success: true,
-                    message: '로그인성공'
+                    message: '로그인성공',
+                    name: row[0].user_name
                 })
             } else {
                 res.json({ //비번틀림
@@ -77,5 +76,8 @@ router.post('/logincheck', function(req, res) {
             }
         }
     })
+
 });
+///////////////////////////////////////////////////////
+
 module.exports = router;

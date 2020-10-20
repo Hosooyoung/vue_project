@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql');
+var session = require('express-session');
 
 var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
@@ -26,10 +27,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use('/index', indexRouter);
 app.use('/users', usersRouter);
-
+app.use(session({
+    key: 'sid',
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 2400 * 60 * 60 // 쿠키 유효기간 24시간
+    }
+}));
 // catch 404 and forward to error handler
-
-
 // error handler
 app.use(function(err, req, res, next) {
     // set locals, only providing error in development
@@ -47,6 +54,7 @@ var connection = mysql.createConnection({
     password: 'admin',
     database: 'vue_project'
 });
+
 // Connect
 connection.connect(function(err) {
     if (err) {
@@ -59,4 +67,5 @@ connection.connect(function(err) {
 app.use(function(req, res, next) {
     next(createError(404));
 });*/
+
 module.exports = app;

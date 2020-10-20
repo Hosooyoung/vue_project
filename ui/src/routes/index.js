@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/components/MovieIndexPage'
+import Main from '@/components/Main'
 import Show from '@/components/MovieShowPage'
 import login from '@/components/login'
 import create from '@/components/CreateAccount'
@@ -8,9 +8,9 @@ Vue.use(Router)
 export const router = new Router({
     mode: 'history',
     routes: [{
-            path: '/index',
-            name: 'index',
-            component: Index
+            path: '/main',
+            name: 'main',
+            component: Main
         },
         {
             path: '/show',
@@ -26,7 +26,19 @@ export const router = new Router({
             path: '/create',
             name: 'create',
             component: create
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: login
         }
 
     ]
+})
+router.afterEach(() => {
+    var check_id = localStorage.getItem("id");
+    if (check_id == null) {
+        alert("login error!")
+        router.push('/login')
+    }
 })
