@@ -1,5 +1,6 @@
 <template>
     <div class="input_row">
+    <Sidebar></Sidebar>
   <label for="id">아이디</label>
   <input type="text" id="id" v-model="user.userid">
 <br>
@@ -19,6 +20,7 @@
 </div>
 </template>
 <script>
+import Sidebar from './Sidebar'
 export default {
     data: function () {
   return {
@@ -31,7 +33,10 @@ export default {
 
     }
   }
-},
+},components: {
+    //HelloWorld,
+    Sidebar
+  },
    methods: {
   createAccount: function () {
     this.$http.post('/users/createAcc', { 

@@ -5,12 +5,13 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+//import HelloWorld from './components/HelloWorld.vue'
+//import Sidebar from './components/Sidebar'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    //HelloWorld,
+   // Sidebar
   }
 }
 </script>

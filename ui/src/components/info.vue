@@ -1,7 +1,7 @@
 <template>
   <div>
   <Sidebar></Sidebar>
-    <p>메인화며어언</p>
+    <p>공지사항</p>
     <button v-on:click="logout">로그아웃</button>
   </div>
 </template>
