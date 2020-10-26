@@ -2,29 +2,37 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
 import Show from '@/components/MovieShowPage'
-import login from '@/components/login'
+import login from '@/components/Login'
 import board from '@/components/board'
 import info from '@/components/info'
 import create from '@/components/CreateAccount'
 import todo from '@/components/Todo'
 Vue.use(Router)
+
+const requireAuth = () => (to, from, next) => {
+    var check_id = localStorage.getItem("id");
+    if (check_id == null) {
+        alert('Access Denied, Check login');
+        return next('/login');
+    }
+    next();
+};
+
 export const router = new Router({
     mode: 'history',
     routes: [{
-            path: '/main',
+            path: '/',
             name: 'main',
-            component: Main
+            component: Main,
+            beforeEnter: requireAuth()
         },
         {
             path: '/show',
             name: 'show',
-            component: Show
+            component: Show,
+            beforeEnter: requireAuth()
         },
-        {
-            path: '/',
-            name: 'login',
-            component: login
-        },
+
         {
             path: '/create',
             name: 'create',
@@ -33,17 +41,20 @@ export const router = new Router({
         {
             path: '/todo',
             name: 'todo',
-            component: todo
+            component: todo,
+            beforeEnter: requireAuth()
         },
         {
             path: '/info',
             name: 'info',
-            component: info
+            component: info,
+            beforeEnter: requireAuth()
         },
         {
             path: '/board',
             name: 'board',
-            component: board
+            component: board,
+            beforeEnter: requireAuth()
         },
         {
             path: '/login',
@@ -52,11 +63,4 @@ export const router = new Router({
         }
 
     ]
-})
-router.afterEach(() => {
-    var check_id = localStorage.getItem("id");
-    if (check_id == null) {
-        //alert("login error!")
-        router.push('/login')
-    }
 })

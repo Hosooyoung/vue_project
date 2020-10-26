@@ -19,7 +19,7 @@ export default {
      console.log('logout')
     localStorage.removeItem("id")
      localStorage.removeItem("name")
-    this.$router.push('/') 
+    this.$router.push('/login') 
   }
 },
 components: {

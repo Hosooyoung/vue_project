@@ -35,7 +35,7 @@ export default {
 },
 methods: {
  login: function () {
-     console.log('logincheck!!!')
+     //console.log('logincheck!!!')
     this.$http.post('/users/logincheck', {
       user: this.user
     })
@@ -46,7 +46,7 @@ methods: {
         alert(res.data.message);
         localStorage.setItem("id" ,this.user.userid)
         localStorage.setItem("name" ,res.data.name)
-        this.$router.push('/main') 
+        this.$router.push('/') 
       }else
         alert(res.data.message);
       },

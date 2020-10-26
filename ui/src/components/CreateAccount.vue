@@ -1,6 +1,5 @@
 <template>
     <div class="input_row">
-    <Sidebar></Sidebar>
   <label for="id">아이디</label>
   <input type="text" id="id" v-model="user.userid">
 <br>
@@ -20,7 +19,6 @@
 </div>
 </template>
 <script>
-import Sidebar from './Sidebar'
 export default {
     data: function () {
   return {
@@ -34,8 +32,7 @@ export default {
     }
   }
 },components: {
-    //HelloWorld,
-    Sidebar
+    
   },
    methods: {
   createAccount: function () {
@@ -45,7 +42,7 @@ export default {
     .then((res) => {
       if (res.data.createsuccess == true) {
         alert(res.data.message);
-        this.$router.push('/') 
+        this.$router.push('/login') 
       }
       if (res.data.createsuccess == false) {
         alert(res.data.message);

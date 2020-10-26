@@ -6,7 +6,7 @@
           <div>Menu</div>
         </li>
         <li>
-	<a href="/main">메인화면</a></li>
+	<a href="/">메인화면</a></li>
         <li>
 	<a href="/info">공지사항</a> </li>
         <li>
@@ -33,7 +33,7 @@ export default {
      console.log('logout')
     localStorage.removeItem("id")
      localStorage.removeItem("name")
-    this.$router.push('/') 
+    this.$router.push('/login') 
   }
 },
 

@@ -11,5 +11,5 @@ module.exports = {
             }
         }
     },
-    outputDir: '../svr/public'
+    outputDir: '/var/www/hodu_html'
 }
