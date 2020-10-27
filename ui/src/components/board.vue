@@ -27,4 +27,4 @@ components: {
     Sidebar
   }
 }
-</script>
+</script>  

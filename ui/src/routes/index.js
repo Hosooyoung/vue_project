@@ -2,11 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
 import Show from '@/components/MovieShowPage'
-import login from '@/components/Login'
+import login from '@/components/login'
 import board from '@/components/board'
 import info from '@/components/info'
 import create from '@/components/CreateAccount'
 import todo from '@/components/Todo'
+import infowrite from '@/components/infowrite'
+
 Vue.use(Router)
 
 const requireAuth = () => (to, from, next) => {
@@ -60,6 +62,12 @@ export const router = new Router({
             path: '/login',
             name: 'login',
             component: login
+        },
+        {
+            path: '/infowrite',
+            name: 'infowrite',
+            component: infowrite,
+            beforeEnter: requireAuth()
         }
 
     ]

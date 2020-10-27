@@ -9,6 +9,7 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var infoRouter = require('./routes/info');
 const cors = require('cors');
 var app = express();
 app.use(cors());
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use('/index', indexRouter);
 app.use('/users', usersRouter);
+app.use('/info', infoRouter);
 ///////////////////sessionSet//////////////////////////////
 app.use(session({
     key: 'sid',
