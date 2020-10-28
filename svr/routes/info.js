@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
     database: 'vue_project'
 });
 router.get('/getList', function(req, res, next) {
-    console.log('getlist');
+    //console.log('getlist');
     let ipp = 10;
     let totalCount = 0;
     let block = 10;
@@ -23,7 +23,7 @@ router.get('/getList', function(req, res, next) {
     body = req.query;
     sql = ` SELECT  count(*) cnt FROM notice `;
     connection.query(sql, (err, data) => {
-        console.log('cnt:' + data[0].cnt);
+        // console.log('cnt:' + data[0].cnt);
         if (err) throw err;
         totalCount = data[0].cnt;
 
@@ -44,7 +44,6 @@ router.get('/getList', function(req, res, next) {
             "end_page": end_page,
             "ipp": ipp
         }
-        console.log(paging);
         sql = ` SELECT * FROM notice order by seq desc  LIMIT ?, ? `;
         connection.query(sql, [start, end], (err, list) => {
             if (err) throw err;
@@ -59,6 +58,21 @@ router.post('/addNotice', function(req, res, next) {
         if (err) throw err;
 
         res.send({ success: true });
+    })
+});
+router.get('/inforead/:seq', function(req, res, next) {
+    console.log('hi');
+    body = req.query;
+    seq = req.params.seq;
+    console.log('seq' + seq);
+    sql = " SELECT * FROM notice WHERE seq = ? ";
+
+    connection.query(sql, [seq], (err, data) => {
+        if (err) throw err;
+        console.log('res : ' + res);
+        console.log('res title: ' + data[0].title);
+        console.log('res con: ' + data[0].contents);
+        res.send({ success: true, data: data });
     })
 });
 module.exports = router;

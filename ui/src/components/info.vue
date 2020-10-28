@@ -22,7 +22,7 @@
 				</tr>
 				<tr v-for="(row, idx) in list" :key="idx">
 					<td>{{row.seq}}</td>
-					<td class="txt_left"><a href="javascript:;">{{row.title}}</a></td>
+					<td class="txt_left"><a href="javascript:;" @click="fnView(`${row.seq}`)">{{row.title}}</a></td>
 					<td>관리자</td>
 					<td>{{row.write_date.substr(0,10)}}</td>
 				</tr>
@@ -113,7 +113,12 @@ export default {
 				this.fnGetList();
 			}
 		}
-  },components: {
+		,fnView(seq) {
+			this.body.seq = seq;
+			this.$router.push({path:'./inforead',query:this.body}); //추가한 상세페이지 라우터
+	}
+}
+,components: {
     //HelloWorld,
     sidebar
   }

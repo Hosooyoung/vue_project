@@ -8,7 +8,7 @@ import info from '@/components/info'
 import create from '@/components/CreateAccount'
 import todo from '@/components/Todo'
 import infowrite from '@/components/infowrite'
-
+import inforead from '@/components/inforead'
 Vue.use(Router)
 
 const requireAuth = () => (to, from, next) => {
@@ -67,6 +67,12 @@ export const router = new Router({
             path: '/infowrite',
             name: 'infowrite',
             component: infowrite,
+            beforeEnter: requireAuth()
+        },
+        {
+            path: '/inforead',
+            name: 'inforead',
+            component: inforead,
             beforeEnter: requireAuth()
         }
 
