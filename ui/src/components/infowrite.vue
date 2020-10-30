@@ -1,7 +1,7 @@
 <template>
 	<div>
     <sidebar></sidebar>
-		<h1>공지사항 등록</h1>
+		<h1>공지사항 {{num ? '수정':'등록'}}</h1> 
 
 		<div class="AddWrap">
 			<form>
@@ -24,7 +24,9 @@
 
 		<div class="btnWrap">
 			<a href="javascript:;" @click="fnList" class="btn">목록</a>
-			<a href="javascript:;" @click="fnAddNoti" class="btnAdd btn">등록</a>
+			<a v-if="!seq" href="javascript:;" @click="fnAddNoti" class="btnAdd btn">등록</a>
+			<a v-else href="javascript:;" @click="fnModNoti" class="btnAdd btn">수정</a>
+			
 		</div>	
 	</div>
 </template>
@@ -38,6 +40,12 @@ export default {
 			,contents:''
 			,id:localStorage.getItem("id")
 			,form:'' //form 전송 데이터
+			,seq:this.$route.query.seq
+			,body:this.$route.query
+		}
+	},mounted(){
+		if(this.seq) {
+			this.fnGetView();
 		}
 	}
 	,methods:{
@@ -71,7 +79,48 @@ export default {
 				console.log(err);
 			})
 			
+		},fnGetView() {
+			this.$http.get('/info/inforead/'+this.body.seq,{params:this.body})
+			.then((res)=>{	
+				this.data = res.data.data[0];
+				this.title = this.data.title;
+				this.contents = this.data.contents;
+			
+			})
+			.catch((err)=>{
+				console.log(err);
+			})
 		}
+		,fnModNoti() {
+			if(!this.title) {
+				alert("제목을 입력해 주세요");
+				this.$refs.title.focus(); //방식으로 선택자를 찾는다.
+				return;
+			}
+			this.form = {
+				title:this.title
+				,contents:this.contents
+				,id:this.id
+				,seq:this.seq
+			} 			
+			this.$http.post('/info/reNotice',this.form)
+			.then((res)=>{
+				if(res.data.success) {
+					alert('수정되었습니다.');
+					this.fnRead();
+				} else {
+					alert("실행중 실패했습니다.\n다시 이용해 주세요");
+				}
+			})
+			.catch((err)=>{
+				console.log(err);
+			})
+		},
+		fnRead() {
+			this.$router.push({path:'./inforead',"query":this.body});
+		}	
+
+
     },
 components: {
     //HelloWorld,

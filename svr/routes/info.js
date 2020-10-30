@@ -8,6 +8,48 @@ var connection = mysql.createConnection({
     password: 'admin',
     database: 'vue_project'
 });
+
+function modifySeq() {
+    console.log('진입은합니다.');
+    sql = 'alter table notice auto_increment=1';
+    connection.query(sql, (err, result) => {
+        console.log(sql);
+        if (err) {
+            console.log(err);
+            throw err;
+
+        } else {
+            console.log('good');
+            console.log(result);
+        }
+
+    })
+    sql = 'set @count=0';
+    connection.query(sql, (err, result) => {
+        console.log(sql);
+        if (err) {
+
+            console.log(err);
+            throw err;
+        } else {
+            console.log('good');
+            console.log(result);
+        }
+    })
+    sql = 'update notice set seq = @count:=@count+1';
+    connection.query(sql, (err, result) => {
+        console.log(sql);
+        if (err) {
+
+            console.log(err);
+            throw err;
+        } else {
+            console.log('good');
+            console.log(result);
+        }
+    })
+
+};
 router.get('/getList', function(req, res, next) {
     //console.log('getlist');
     let ipp = 10;
@@ -56,7 +98,7 @@ router.post('/addNotice', function(req, res, next) {
     sql = " INSERT INTO notice (title, contents,hit) values (?, ?, ?) ";
     connection.query(sql, [body.title, body.contents, 0], (err, result) => {
         if (err) throw err;
-
+        modifySeq();
         res.send({ success: true });
     })
 });
@@ -75,4 +117,26 @@ router.get('/inforead/:seq', function(req, res, next) {
         res.send({ success: true, data: data });
     })
 });
+router.post('/reNotice', function(req, res, next) {
+    body = req.body; //post
+    sql = " UPDATE notice SET title = ?, contents = ?,  rewrite_date= now() WHERE seq = ? ";
+    connection.query(sql, [body.title, body.contents, body.seq], (err, result) => {
+        if (err) throw err;
+        res.send({ success: true });
+    })
+});
+router.post('/DelNoti', function(req, res, next) {
+    seq = req.body.seq; //post
+    sql = " delete from notice WHERE seq = ? ";
+    console.log('seq : ' + body.seq);
+    connection.query(sql, [body.seq], (err, result) => {
+        if (err) throw err;
+        modifySeq();
+
+        res.send({ success: true });
+    })
+
+});
+
+
 module.exports = router;

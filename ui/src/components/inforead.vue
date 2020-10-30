@@ -20,10 +20,9 @@
 				</table>
 			</form>
 		</div>
-
-		<div class="btnWrap">
-			<a href="javascript:;" @click="fnList" class="btn">목록</a>
-		</div>	
+		<button @click="fnList" class="btnRightWrap">목록</button>
+		<button @click="fnMod" class="btnRightWrap">수정</button>
+		<button @click="fnDel" class="btnRightWrap">삭제</button>
 	</div>
 </template>
 
@@ -48,7 +47,8 @@ export default {
 				this.data = res.data.data[0];
 				this.title = this.data.title;
 				this.contents = this.data.contents.replace(/(\n)/g,'<br/>');
-			
+				console.log('바디쉑 :'+this.body.seq)
+				console.log('쿼리쉑 :'+this.$route.query.seq)
 			})
 			.catch((err)=>{
 				console.log(err);
@@ -57,7 +57,25 @@ export default {
 		,fnList(){
 			delete this.body.seq;
 			this.$router.push({path:'./info',query:this.body});
+		},fnMod() {
+			this.$router.push({path:'./infowrite',query:this.body}); //등록화면으로 이동하면서 파라미터를 넘겨준다.
+		},
+		fnDel(){
+			console.log('델델덷ㄹ델');
+		this.$http.post('/info/DelNoti',{params:this.body.seq})
+			.then((res)=>{	
+				if(res.data.success) {
+					this.$http.get('/modSeq');
+					alert('삭제되었습니다.');
+					this.$router.push('/info');
+				}
+			})
+			.catch((err)=>{
+				console.log(err);
+			})
 		}
+		
+    
 	}
 }
 </script>
